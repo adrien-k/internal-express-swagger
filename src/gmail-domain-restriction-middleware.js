@@ -71,7 +71,7 @@ const createGmailDomainRestrictionMiddleware = (googleOauthConfig) => {
     if (req.signedCookies[AUTHORIZATION_COOKIE] !== 'true') {
       // Low-cost html rendering, but enough to get started :D
       // req.baseUrl represents the route on which internalApiDocs is mounted.
-      let HTLMmessage = `<p>You need to authenticate yourself<p><a href="${req.baseUrl}/auth">Open Google Oauth</a>`;
+      let HTLMmessage = `<p>Access to API docs is restricted to users with emails at: ${allowedDomains.join(', ')}.</p><a href="${req.baseUrl}/auth">Authenticate with Google</a>`;
       if (req.params.failed) {
         HTLMmessage =
           '<p style="color: red; font-weight: bold;>Authentication failed</p>' + HTLMmessage;

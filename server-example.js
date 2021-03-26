@@ -66,7 +66,7 @@ apiDoc.get('/pet/{id}', {
       description: 'ID of your pet',
       required: true,
       type: 'string',
-      example: '1',
+      example: '1'
     },
   ],
   produces: ['application/json'],

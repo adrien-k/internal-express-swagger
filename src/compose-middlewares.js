@@ -1,3 +1,15 @@
+/**
+ * Creates a request handler function that runs through all given middlewares,
+ * as long as they call their next function without error.
+ *
+ * Within a middleware:
+ * - If next is not called, the chain stops there.
+ * - If next is called with an error, the chain calls the main request handler next callback.
+ *
+ * Parameters can be made of multiple levels of nested arrays of middlewares.
+ * ex: composeMiddlewares(middleware1, [middleware2, middleware3])
+ *
+ */
 const composeMiddlewares = (...middlewares) => {
   function recursiveRunAllMiddlewares(middlewares, req, res, next) {
     if (middlewares.length) {

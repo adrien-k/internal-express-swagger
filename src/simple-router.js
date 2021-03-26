@@ -1,7 +1,10 @@
 const composeMiddlewares = require('./compose-middlewares');
 
-// We could use express's Router, but having this simple light version avoids dependency
-// conflicts with the express already be installed in the app embedding the docs
+/**
+ * Create a simple router that follows Express router convention.
+ * We could use express's Router, but having this simple light version avoids dependency
+ * conflicts with the express already installed in the app embedding the docs.
+ */
 const SimpleRouter = () => {
   const routes = [];
 
@@ -21,9 +24,11 @@ const SimpleRouter = () => {
     routes.push({ method, path, handler: composeMiddlewares(handlers) });
   }
 
-  router.get = function (path, ...handlers) {
-    addRoute({ path, method: 'GET', handlers });
-  };
+  for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
+    router[method] = function (path, ...handlers) {
+      addRoute({ path, method: method.toUpperCase(), handlers });
+    };
+  }
 
   router.use = function (...handlers) {
     let path

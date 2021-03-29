@@ -6,15 +6,16 @@ It also adds an easy way to declare route documentation in Javascript.
 ## Installation
 
 ```bash
-npm install --save git+https://github.com/adrien-k/internal-express-swagger.git
+npm install --save @layer0/internal-express-swagger
 ```
 
 ## Configuration
 
 ### Google Oauth
 
-You will need some Google Oauth credentials which allowin redirecting to your API callback URL.
-The callback URL is constructed as:
+You will need Google Oauth credentials to authenticate your users with. Those credentials need to allow the callback URI redirecting to your API.
+
+The callback URI is constructed as:
 
 https://`<your-host>`/`<API docs mount path>`/auth/callback
 
@@ -45,7 +46,7 @@ Provide a list of email domains that are allowed to access the API docs. Other g
 const express = require('express');
 const app = express();
 const port = 3000;
-const InternalExpressSwagger = require('internal-express-swagger');
+const InternalExpressSwagger = require('@layer0/internal-express-swagger');
 
 const apiDoc = new InternalExpressSwagger({
   // See Swagger 2.0 specifications https://swagger.io/specification/v2/#info-object for 'info' field

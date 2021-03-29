@@ -28,6 +28,8 @@ Generate a long string (~256 chars) and keep it secret.
 
 This ensures that the authorization cookie was produced by the API and not been forged.
 
+*If your already have `cookie-parser` mounted on your Express App, you can ignore this parameter*
+
 ### Allowed domains
 
 Provide a list of email domains that are allowed to access the API docs. Other gmail accounts will be rejected.
@@ -46,6 +48,7 @@ const port = 3000;
 const InternalExpressSwagger = require('internal-express-swagger');
 
 const apiDoc = new InternalExpressSwagger({
+  // See Swagger 2.0 specifications https://swagger.io/specification/v2/#info-object for 'info' field
   info: {
     title: 'Pet Store',
     description: 'API for my Pet Store'
@@ -58,6 +61,7 @@ const apiDoc = new InternalExpressSwagger({
   },
 });
 
+// See Swagger 2.0 specifications https://swagger.io/specification/v2/#paths-object for the 'path' field
 apiDoc.get('/pet/{id}', {
   description: 'Retrieve a pet by ID',
   parameters: [

@@ -1,6 +1,6 @@
 const swaggerUi = require('swagger-ui-express');
 const composeMiddlewares = require('./src/compose-middlewares');
-const createGmailDomainRestrictionMiddleware = require('./src/gmail-domain-restriction-middleware');
+const {createGmailDomainRestrictionMiddleware, createApiDocsAutorizationMiddleware} = require('./src/gmail-domain-restriction-middleware');
 
 module.exports = class InternalApiDocs {
   constructor({ info, googleOauthConfig }) {
@@ -12,6 +12,10 @@ module.exports = class InternalApiDocs {
     };
 
     this._googleOauthConfig = googleOauthConfig;
+  }
+
+  apiDocsAuthorizationMiddleware() {
+    return createApiDocsAutorizationMiddleware(this._googleOauthConfig)
   }
 
   expressHandler() {
